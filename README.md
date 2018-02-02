@@ -2,7 +2,7 @@
 
 Magento 2 module for creating unlimited sliders with unlimited items.
 
-##Installation
+## Installation
 1. In composer.json inside repositories add:
 ```
 {
@@ -20,7 +20,7 @@ composer update
 php bin/magento setup:upgrade
 ```
 
-##Usage
+## Usage
 1. Add the images you want in your slider as banners under Content > Banners, ensuring you use the "Insert Image..." option under the Content section each time
 2. Edit the page/block where you want to add a slider
 3. Click the "Insert Widget" button in the WYSIWYG editor
