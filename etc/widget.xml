@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="alexryall_slider" class="AlexRyall\Slider\Block\Widget\Slider">
+        <label translate="true">Slider</label>
+        <description translate="true">Displays a Slick slider</description>
+        <parameters>
+            <parameter name="speed" xsi:type="text" visible="true">
+                <label translate="true">Speed</label>
+                <description translate="true">Time between transition in seconds</description>
+                <value>5</value>
+            </parameter>
+            <parameter xsi:type="select" name="direction" required="true" visible="true">
+                <label translate="true">Direction</label>
+                <options>
+                    <option name="left" value="left" selected="true">
+                        <label translate="true">Left To Right</label>
+                    </option>
+                    <option name="right" value="right">
+                        <label translate="true">Right To Left</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter xsi:type="select" name="fade" visible="true">
+                <label translate="true">Fade</label>
+                <options>
+                    <option name="no" value="no" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="yes" value="yes">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter xsi:type="block" name="banner_ids" visible="true">
+                <label translate="true">Specify Banners</label>
+                <block class="Magento\Banner\Block\Adminhtml\Widget\Chooser" />
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>
