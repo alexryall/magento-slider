@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="alexryall_slider_slide_data_source" xsi:type="string">AlexRyall\Slider\Model\ResourceModel\Slide\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="AlexRyall\Slider\Model\ResourceModel\Slide\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">alexryall_slider_slide</argument>
+            <argument name="resourceModel" xsi:type="string">AlexRyall\Slider\Model\ResourceModel\Slide</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magento\Catalog\CategoryImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">alexryallslider/tmp/slide</argument>
+            <argument name="basePath" xsi:type="string">alexryallslider/slide</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="AlexRyall\Slider\Controller\Adminhtml\Slide\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Magento\Catalog\CategoryImageUpload</argument>
+        </arguments>
+    </type>
+</config>

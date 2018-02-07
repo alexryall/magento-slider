@@ -6,11 +6,9 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
     protected $_template = "widget/slider.phtml";
 
     /**
-     * Store Banner resource instance
-     *
-     * @var \Magento\Banner\Model\ResourceModel\Banner
+     * @var \AlexRyall\Slider\Model\SlideFactory
      */
-    protected $_bannerResource;
+    private $slideFactory;
 
     /**
      * @var int
@@ -24,18 +22,18 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
 
     /**
      * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Magento\Banner\Model\ResourceModel\Banner $resource
+     * @param \AlexRyall\Slider\Model\SlideFactory $slideFactory
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        \Magento\Banner\Model\ResourceModel\Banner $resource,
+        \AlexRyall\Slider\Model\SlideFactory $slideFactory,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->_bannerResource = $resource;
+        $this->slideFactory = $slideFactory;
         $this->_currentStoreId = $this->_storeManager->getStore()->getId();
         $this->_filterProvider = $filterProvider;
     }
@@ -47,26 +45,28 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
      */
     public function getUniqueId()
     {
-        return md5($this->getBannerIds());
+        return md5($this->getSlideIds());
     }
 
     /**
-     * Get array of banner images
+     * Get array of slide images
      *
      * @return array
      */
     public function getBanners() {
-        $banners = [];
+        $slides = [];
 
-        $bannerIds = explode(',', $this->getBannerIds());
+        $slideIds = explode(',', $this->getSlideIds());
 
-        foreach ($bannerIds as $bannerId) {
-            $html = $this->_filterProvider->getPageFilter()->filter($this->_bannerResource->getStoreContent($bannerId, $this->_currentStoreId)); //change {{media url=""}}
+        foreach ($slideIds as $slideId) {
+            $slide = $this->slideFactory->create()->load($slideId);
 
-            array_push($banners, $html);
+            $html = '<img src="' . $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $slide->getImage() . '" alt="' . $slide->getName() . '"/>';
+
+            array_push($slides, $html);
         }
 
-        return $banners;
+        return $slides;
     }
 
     /**

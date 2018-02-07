@@ -32,9 +32,8 @@
                     </option>
                 </options>
             </parameter>
-            <parameter xsi:type="block" name="banner_ids" visible="true">
-                <label translate="true">Specify Banners</label>
-                <block class="Magento\Banner\Block\Adminhtml\Widget\Chooser" />
+            <parameter xsi:type="multiselect" name="slide_ids" visible="true" source_model="AlexRyall\Slider\Model\Adminhtml\System\Config\Slides">
+                <label translate="true">Specify Slides</label>
             </parameter>
         </parameters>
     </widget>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">alexryallslider_slide.alexryallslider_slide_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Slide</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="AlexRyall\Slider\Block\Adminhtml\Slide\Edit\SaveButton"/>
+            <button name="reset" class="AlexRyall\Slider\Block\Adminhtml\Slide\Edit\ResetButton"/>
+            <button name="delete" class="AlexRyall\Slider\Block\Adminhtml\Slide\Edit\DeleteButton"/>
+            <button name="back" class="AlexRyall\Slider\Block\Adminhtml\Slide\Edit\BackButton"/>
+        </buttons>
+        <namespace>alexryallslider_slide_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>alexryallslider_slide_form.alexryallslider_slide_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="alexryallslider_slide_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="alexryallslider/slide/save"/>
+        </settings>
+        <dataProvider class="AlexRyall\Slider\Model\DataProvider" name="alexryallslider_slide_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="content" sortOrder="10">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Content</label>
+        </settings>
+        <field name="name" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">slide</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Name</label>
+                <required>true</required>
+            </settings>
+        </field>
+        <field name="image" formElement="fileUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">slide</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>ui/form/element/uploader/uploader</elementTmpl>
+                <dataType>string</dataType>
+                <label translate="true">Image</label>
+                <required>true</required>
+            </settings>
+            <formElements>
+                <fileUploader>
+                    <settings>
+                        <required>true</required>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="alexryallslider/slide/upload"/>
+                        </uploaderConfig>
+                        <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
+                    </settings>
+                </fileUploader>
+            </formElements>
+        </field>
+    </fieldset>
+</form>
