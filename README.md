@@ -8,20 +8,9 @@ Tested with Magento Open Source 2.2.2
 For Magento Commerce 2.2.2 version that makes use of [banner functionality](http://docs.magento.com/m2/ee/user_guide/cms/banner-rotator.html) use the [v1 branch](https://github.com/alexryall/magento-slider/tree/v1)
 
 ## Installation
-1. In composer.json inside repositories add:
+In a terminal window from the root of your project:
 ```
-{
-    "type": "git",
-    "url": "git@github.com:alexryall/magento-slider.git"
-}
-```
-2. In composer.json inside require add:
-```
-"alexryall/slider": "2.0.1"
-```
-3. From the root of your Magento install run
-```
-composer update
+composer require alexryall/slider
 php bin/magento setup:upgrade
 ```
 
