@@ -17,7 +17,7 @@ For Magento Commerce 2.2.2 version that makes use of [banner functionality](http
 ```
 2. In composer.json inside require add:
 ```
-"alexryall/slider": "2.0.0"
+"alexryall/slider": "2.0.1"
 ```
 3. From the root of your Magento install run
 ```

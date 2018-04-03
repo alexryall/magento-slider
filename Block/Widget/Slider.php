@@ -61,7 +61,17 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
         foreach ($slideIds as $slideId) {
             $slide = $this->slideFactory->create()->load($slideId);
 
-            $html = '<img src="' . $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $slide->getImage() . '" alt="' . $slide->getName() . '"/>';
+            $html = '';
+
+            if ($slide->getUrl()) {
+                $html .= '<a href="' . $slide->getUrl() . '">';
+            }
+
+            $html .= '<img src="' . $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $slide->getImage() . '" alt="' . $slide->getName() . '"/>';
+
+            if ($slide->getUrl()) {
+                $html .= '</a>';
+            }
 
             array_push($slides, $html);
         }
