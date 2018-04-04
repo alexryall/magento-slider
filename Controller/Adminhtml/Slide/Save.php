@@ -8,9 +8,14 @@ use Magento\Framework\Exception\LocalizedException;
 class Save extends \Magento\Backend\App\Action
 {
     /**
-     * Upload directory for images (not sure why they are saving in baseTmpPath)
+     * baseTmpPath of images
      */
-    const basePath = 'alexryallslider/tmp/slide/';
+    const baseTmpPath = 'alexryallslider/tmp/slide/';
+
+    /**
+     * basePath of images
+     */
+    const basePath = 'alexryallslider/slide/';
 
     /**
      * @var DataPersistorInterface
@@ -23,10 +28,15 @@ class Save extends \Magento\Backend\App\Action
     private $slideFactory;
 
     /**
+     * @var \Magento\Catalog\Model\ImageUploader
+     */
+    private $imageUploader;
+
+    /**
      * @param Action\Context $context
      * @param DataPersistorInterface $dataPersistor
      * @param \AlexRyall\Slider\Model\SlideFactory $slideFactory
-     *
+     * @param \Magento\Catalog\Model\ImageUploader $imageUploader
      */
     public function __construct(
         Action\Context $context,
@@ -36,6 +46,21 @@ class Save extends \Magento\Backend\App\Action
         $this->dataPersistor = $dataPersistor;
         $this->slideFactory = $slideFactory;
         parent::__construct($context);
+    }
+
+    /**
+     * @return \Magento\Catalog\Model\ImageUploader
+     *
+     * @deprecated 101.0.0
+     */
+    private function getImageUploader()
+    {
+        if ($this->imageUploader === null) {
+            $this->imageUploader = \Magento\Framework\App\ObjectManager::getInstance()
+                ->get(\AlexRyall\Slider\SlideImageUpload::class);
+        }
+
+        return $this->imageUploader;
     }
 
     /**
@@ -55,6 +80,8 @@ class Save extends \Magento\Backend\App\Action
             }
 
             if (isset($data['image'][0]['name'])) {
+                $this->getImageUploader()->moveFileFromTmp($data['image'][0]['name']);
+
                 $data['image'] = Save::basePath . str_replace(Save::basePath, "", $data['image'][0]['name']);
             } else {
                 $data['image'] = null;
