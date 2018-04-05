@@ -13,12 +13,12 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
     /**
      * @var int
      */
-    protected $_currentStoreId;
+    private $_currentStoreId;
 
     /**
      * @var \Magento\Cms\Model\Template\FilterProvider
      */
-    protected $_filterProvider;
+    private $_filterProvider;
 
     /**
      * @param \Magento\Framework\View\Element\Template\Context $context
@@ -45,7 +45,7 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
      */
     public function getUniqueId()
     {
-        return md5($this->getSlideIds());
+        return hash('sha256', $this->getSlideIds());
     }
 
     /**
@@ -53,7 +53,8 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
      *
      * @return array
      */
-    public function getBanners() {
+    public function getBanners()
+    {
         $slides = [];
 
         $slideIds = explode(',', $this->getSlideIds());
@@ -67,7 +68,8 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
                 $html .= '<a href="' . $slide->getUrl() . '">';
             }
 
-            $html .= '<img src="' . $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . $slide->getImage() . '" alt="' . $slide->getName() . '"/>';
+            $baseUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+            $html .= '<img src="' . $baseUrl  . $slide->getImage() . '" alt="' . $slide->getName() . '"/>';
 
             if ($slide->getUrl()) {
                 $html .= '</a>';
@@ -84,7 +86,8 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
      *
      * @return int
      */
-    public function getSpeedInMs() {
+    public function getSpeedInMs()
+    {
         return (int)$this->getSpeed() * 1000;
     }
 
@@ -93,10 +96,9 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
      *
      * @return string
      */
-    public function getIsRtl() {
-        if ($this->getDirection() == 'right') {
-            //return 'true'; //rtl is broken in slick
-        }
+    public function getIsRtl()
+    {
+        //rtl is broken in slick
         return 'false';
     }
 
@@ -105,7 +107,8 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
      *
      * @return string
      */
-    public function getIsFade() {
+    public function getIsFade()
+    {
         if ($this->getFade() == 'yes') {
             return 'true';
         }

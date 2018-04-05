@@ -15,6 +15,7 @@
 
  */
 /* global window, document, define, jQuery, setInterval, clearInterval */
+// @codingStandardsIgnoreFile
 ;(function(factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {

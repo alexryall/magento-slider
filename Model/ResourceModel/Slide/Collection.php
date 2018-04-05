@@ -8,7 +8,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected $_idFieldName = 'id';
 
-    protected function _construct()
+    public function _construct()
     {
         $this->_init('AlexRyall\Slider\Model\Slide', 'AlexRyall\Slider\Model\ResourceModel\Slide');
     }

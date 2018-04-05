@@ -8,12 +8,12 @@ class Slides implements ArrayInterface
     /**
      * @var array
      */
-    protected $options;
+    private $options;
 
     /**
      * @var \AlexRyall\Slider\Model\ResourceModel\Slide\Collection
      */
-    protected $slideCollection;
+    private $slideCollection;
 
     /**
      * @param \AlexRyall\Slider\Model\ResourceModel\Slide\Collection $slideCollection

@@ -9,7 +9,7 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
     /**
      * @var StoreManagerInterface
      */
-    protected $storeManager;
+    private $storeManager;
 
     /**
      * @param string $name
@@ -43,8 +43,7 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
     {
         if (isset($this->loadedData)) {
             return $this->loadedData;
-        }
-        else {
+        } else {
             $this->loadedData = null;
         }
         $slides = $this->collection->getItems();
@@ -67,7 +66,8 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      *
      * @return string
      */
-    public function getMediaUrl() {
+    public function getMediaUrl()
+    {
         $mediaUrl = $this->storeManager->getStore()
                 ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
         return $mediaUrl;

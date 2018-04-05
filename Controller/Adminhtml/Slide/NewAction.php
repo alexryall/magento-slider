@@ -6,7 +6,7 @@ class NewAction extends \Magento\Backend\App\Action
     /**
      * @var \Magento\Backend\Model\View\Result\Forward
      */
-    protected $resultForwardFactory;
+    private $resultForwardFactory;
 
     /**
      * @param \Magento\Backend\App\Action\Context $context

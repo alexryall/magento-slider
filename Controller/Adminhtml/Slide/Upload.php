@@ -8,7 +8,7 @@ class Upload extends \Magento\Backend\App\Action
     /**
      * @var \Magento\Catalog\Model\ImageUploader
      */
-    protected $imageUploader;
+    private $imageUploader;
 
     /**
      * @param \Magento\Backend\App\Action\Context $context

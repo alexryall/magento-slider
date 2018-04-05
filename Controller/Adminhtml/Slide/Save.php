@@ -8,19 +8,14 @@ use Magento\Framework\Exception\LocalizedException;
 class Save extends \Magento\Backend\App\Action
 {
     /**
-     * baseTmpPath of images
-     */
-    const baseTmpPath = 'alexryallslider/tmp/slide/';
-
-    /**
      * basePath of images
      */
-    const basePath = 'alexryallslider/slide/';
+    const BASEPATH = 'alexryallslider/slide/';
 
     /**
      * @var DataPersistorInterface
      */
-    protected $dataPersistor;
+    private $dataPersistor;
 
     /**
      * @var \AlexRyall\Slider\Model\SlideFactory
@@ -82,7 +77,7 @@ class Save extends \Magento\Backend\App\Action
             if (isset($data['image'][0]['name'])) {
                 $this->getImageUploader()->moveFileFromTmp($data['image'][0]['name']);
 
-                $data['image'] = Save::basePath . str_replace(Save::basePath, "", $data['image'][0]['name']);
+                $data['image'] = Save::BASEPATH . str_replace(Save::BASEPATH, "", $data['image'][0]['name']);
             } else {
                 $data['image'] = null;
             }
@@ -120,7 +115,8 @@ class Save extends \Magento\Backend\App\Action
             }
 
             $this->dataPersistor->set('alexryallslider_slide', $data);
-            return $resultRedirect->setPath('*/*/edit', ['alexryallslider_slide' => $this->getRequest()->getParam('alexryallslider_slide')]);
+            $param = $this->getRequest()->getParam('alexryallslider_slide');
+            return $resultRedirect->setPath('*/*/edit', ['alexryallslider_slide' => $param]);
         }
         return $resultRedirect->setPath('*/*/');
     }

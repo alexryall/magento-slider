@@ -8,14 +8,14 @@ class GenericButton
      *
      * @var \Magento\Framework\UrlInterface
      */
-    protected $urlBuilder;
+    private $urlBuilder;
 
     /**
      * Registry
      *
      * @var \Magento\Framework\Registry
      */
-    protected $registry;
+    private $registry;
 
     /**
      * @param \Magento\Backend\Block\Widget\Context $context

@@ -10,12 +10,12 @@ class Edit extends \Magento\Backend\App\Action
      *
      * @var \Magento\Framework\Registry
      */
-    protected $_coreRegistry;
+    private $_coreRegistry;
 
     /**
      * @var \Magento\Framework\View\Result\PageFactory
      */
-    protected $resultPageFactory;
+    private $resultPageFactory;
 
     /**
      * @param Action\Context $context
@@ -37,7 +37,7 @@ class Edit extends \Magento\Backend\App\Action
      *
      * @return \Magento\Backend\Model\View\Result\Page
      */
-    protected function _initAction()
+    private function _initAction()
     {
         // load layout
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */

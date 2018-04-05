@@ -22,12 +22,12 @@ class PageActions extends Column
     /**
      * @var \Magento\Cms\Block\Adminhtml\Page\Grid\Renderer\Action\UrlBuilder
      */
-    protected $actionUrlBuilder;
+    private $actionUrlBuilder;
 
     /**
      * @var \Magento\Framework\UrlInterface
      */
-    protected $urlBuilder;
+    private $urlBuilder;
 
     /**
      * @var string

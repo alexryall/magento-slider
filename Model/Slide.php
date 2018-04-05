@@ -9,7 +9,7 @@ class Slide extends \Magento\Framework\Model\AbstractModel implements \Magento\F
 
     protected $_eventPrefix = 'alexryall_slider_slide';
 
-    protected function _construct()
+    public function _construct()
     {
         $this->_init('AlexRyall\Slider\Model\ResourceModel\Slide');
     }
