@@ -45,7 +45,14 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
      */
     public function getUniqueId()
     {
-        return hash('sha256', $this->getSlideIds());
+        return hash('sha256', $this->getAutoplay()
+            . '_' . $this->getSpeed()
+            . '_' . $this->getFade()
+            . '_' . $this->getDirection()
+            . '_' . $this->getNav()
+            . '_' . $this->getSlidesToShow()
+            . '_' . $this->getSlidesToScroll()
+            . '_' . $this->getSlideIds());
     }
 
     /**
@@ -53,7 +60,7 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
      *
      * @return array
      */
-    public function getBanners()
+    public function getBanners($nav = false)
     {
         $slides = [];
 
@@ -64,14 +71,14 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
 
             $html = '';
 
-            if ($slide->getUrl()) {
+            if ($slide->getUrl() && !$nav) {
                 $html .= '<a href="' . $slide->getUrl() . '">';
             }
 
             $baseUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
             $html .= '<img src="' . $baseUrl  . $slide->getImage() . '" alt="' . $slide->getName() . '"/>';
 
-            if ($slide->getUrl()) {
+            if ($slide->getUrl() && !$nav) {
                 $html .= '</a>';
             }
 
@@ -82,6 +89,19 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
     }
 
     /**
+     * Get if the slider should autoplay
+     *
+     * @return string
+     */
+    public function getIsAutplay()
+    {
+        if ($this->getAutoplay() == '1') {
+            return 'true';
+        }
+        return 'false';
+    }
+
+        /**
      * Get speed in milliseconds
      *
      * @return int
@@ -109,7 +129,20 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
      */
     public function getIsFade()
     {
-        if ($this->getFade() == 'yes') {
+        if ($this->getFade() == '1') {
+            return 'true';
+        }
+        return 'false';
+    }
+
+    /**
+     * Get if the slider should have a nav
+     *
+     * @return string
+     */
+    public function getHasNav()
+    {
+        if ($this->getNav() == '1') {
             return 'true';
         }
         return 'false';

@@ -7,6 +7,13 @@
             <div><?php echo $banner ?></div>
         <?php endforeach; ?>
     </div>
+    <?php if ($block->getHasNav() == 'true'): ?>
+    <div id="slider-nav-<?php echo $block->getUniqueId() ?>" class="slider-nav" data-bind="afterRender:initNavSlick">
+        <?php foreach ($block->getBanners(true) as $banner): ?>
+            <div><?php echo $banner ?></div>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
 </div>
 <script type="text/x-magento-init">
     {
@@ -16,9 +23,12 @@
                     "slider-<?php echo $block->getUniqueId() ?>": {
                         "component": "AlexRyall_Slider/js/view/slider",
                         "config": {
+                            "autoplay": <?= $block->getIsAutplay() ?>,
                             "speed": <?= $block->getSpeedInMs() ?>,
                             "rtl": <?= $block->getIsRtl() ?>,
-                            "fade": <?= $block->getIsFade() ?>
+                            "fade": <?= $block->getIsFade() ?>,
+                            "slidesToShow": <?= $block->getSlidesToShow() ?>,
+                            "slidesToScroll": <?= $block->getSlidesToScroll() ?>
                         }
                     }
                 }
