@@ -60,7 +60,7 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
      *
      * @return array
      */
-    public function getBanners($nav = false)
+    public function getBanners()
     {
         $slides = [];
 
@@ -69,20 +69,21 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
         foreach ($slideIds as $slideId) {
             $slide = $this->slideFactory->create()->load($slideId);
 
-            $html = '';
+            $url = null;
 
-            if ($slide->getUrl() && !$nav) {
-                $html .= '<a href="' . $slide->getUrl() . '">';
+            if ($slide->getUrl()) {
+                $url = $slide->getUrl();
             }
 
             $baseUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
-            $html .= '<img src="' . $baseUrl  . $slide->getImage() . '" alt="' . $slide->getName() . '"/>';
+            $src = $baseUrl  . $slide->getImage();
+            $alt = $slide->getName();
 
-            if ($slide->getUrl() && !$nav) {
-                $html .= '</a>';
-            }
-
-            array_push($slides, $html);
+            array_push($slides, [
+                'url' => $url,
+                'src' => $src,
+                'alt' => $alt
+            ]);
         }
 
         return $slides;
@@ -146,5 +147,31 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
             return 'true';
         }
         return 'false';
+    }
+
+    /**
+     * Get the number of slides to show at once
+     *
+     * @return string
+     */
+    public function getSlidesToShowFormatted()
+    {
+        if ($this->getSlidesToShow()) {
+            return $this->getSlidesToShow();
+        }
+        return '1';
+    }
+
+    /**
+     * Get the number of slides to scroll at once
+     *
+     * @return string
+     */
+    public function getSlidesToScrollFormatted()
+    {
+        if ($this->getSlidesToScroll()) {
+            return $this->getSlidesToScroll();
+        }
+        return '1';
     }
 }

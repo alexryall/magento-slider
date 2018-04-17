@@ -4,13 +4,23 @@
 <div class="slider-container" data-bind="scope: 'slider-<?php echo $block->getUniqueId() ?>'">
     <div id="slider-<?php echo $block->getUniqueId() ?>" class="slider" data-bind="afterRender:initSlick">
         <?php foreach ($block->getBanners() as $banner): ?>
-            <div><?php echo $banner ?></div>
+            <div>
+                <?php if ($banner['url']): ?>
+                <a href="<?= $banner['url'] ?>">
+                <?php endif; ?>
+                    <img src="<?= $banner['src'] ?>" alt="<?= $banner['alt'] ?>"/>
+                <?php if ($banner['url']): ?>
+                </a>
+                <?php endif; ?>
+            </div>
         <?php endforeach; ?>
     </div>
     <?php if ($block->getHasNav() == 'true'): ?>
     <div id="slider-nav-<?php echo $block->getUniqueId() ?>" class="slider-nav" data-bind="afterRender:initNavSlick">
-        <?php foreach ($block->getBanners(true) as $banner): ?>
-            <div><?php echo $banner ?></div>
+        <?php foreach ($block->getBanners() as $banner): ?>
+            <div>
+                <img src="<?= $banner['src'] ?>" alt="<?= $banner['alt'] ?>"/>
+            </div>
         <?php endforeach; ?>
     </div>
     <?php endif; ?>
@@ -27,8 +37,8 @@
                             "speed": <?= $block->getSpeedInMs() ?>,
                             "rtl": <?= $block->getIsRtl() ?>,
                             "fade": <?= $block->getIsFade() ?>,
-                            "slidesToShow": <?= $block->getSlidesToShow() ?>,
-                            "slidesToScroll": <?= $block->getSlidesToScroll() ?>
+                            "slidesToShow": <?= $block->getSlidesToShowFormatted() ?>,
+                            "slidesToScroll": <?= $block->getSlidesToScrollFormatted() ?>
                         }
                     }
                 }
