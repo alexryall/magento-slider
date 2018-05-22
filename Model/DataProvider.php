@@ -50,26 +50,8 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         /** @var $slide \AlexRyall\Slider\Model\Slide */
         foreach ($slides as $slide) {
             $this->loadedData[$slide->getId()] = $slide->getData();
-            if ($slide->getImage()) {
-                $m['image'][0]['name'] = $slide->getImage();
-                $m['image'][0]['url'] = $this->getMediaUrl().$slide->getImage();
-                $fullData = $this->loadedData;
-                $this->loadedData[$slide->getId()] = array_merge($fullData[$slide->getId()], $m);
-            }
         }
 
         return $this->loadedData;
-    }
-
-    /**
-     * Get media directory url
-     *
-     * @return string
-     */
-    public function getMediaUrl()
-    {
-        $mediaUrl = $this->storeManager->getStore()
-                ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
-        return $mediaUrl;
     }
 }

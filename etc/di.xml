@@ -13,21 +13,4 @@
             <argument name="resourceModel" xsi:type="string">AlexRyall\Slider\Model\ResourceModel\Slide</argument>
         </arguments>
     </virtualType>
-    <virtualType name="AlexRyall\Slider\SlideImageUpload" type="Magento\Catalog\Model\ImageUploader">
-        <arguments>
-            <argument name="baseTmpPath" xsi:type="string">alexryallslider/tmp/slide</argument>
-            <argument name="basePath" xsi:type="string">alexryallslider/slide</argument>
-            <argument name="allowedExtensions" xsi:type="array">
-                <item name="jpg" xsi:type="string">jpg</item>
-                <item name="jpeg" xsi:type="string">jpeg</item>
-                <item name="gif" xsi:type="string">gif</item>
-                <item name="png" xsi:type="string">png</item>
-            </argument>
-        </arguments>
-    </virtualType>
-    <type name="AlexRyall\Slider\Controller\Adminhtml\Slide\Upload">
-        <arguments>
-            <argument name="imageUploader" xsi:type="object">AlexRyall\Slider\SlideImageUpload</argument>
-        </arguments>
-    </type>
 </config>

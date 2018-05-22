@@ -30,6 +30,22 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
 
+        if (version_compare($context->getVersion(), '2.1.0', '<')) {
+            $tableName = $setup->getTable('alexryall_slider_slide');
+            $connection = $installer->getConnection();
+            $connection->dropColumn($tableName, 'image');
+            $connection->dropColumn($tableName, 'url');
+            $connection->addColumn(
+                $tableName,
+                'content',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'nullable' => false,
+                    'comment' => 'Content'
+                ]
+            );
+        }
+
         $installer->endSetup();
     }
 }

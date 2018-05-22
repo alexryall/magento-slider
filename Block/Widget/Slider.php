@@ -56,7 +56,7 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
     }
 
     /**
-     * Get array of slide images
+     * Get array of slide content
      *
      * @return array
      */
@@ -69,21 +69,7 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
         foreach ($slideIds as $slideId) {
             $slide = $this->slideFactory->create()->load($slideId);
 
-            $url = null;
-
-            if ($slide->getUrl()) {
-                $url = $slide->getUrl();
-            }
-
-            $baseUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
-            $src = $baseUrl  . $slide->getImage();
-            $alt = $slide->getName();
-
-            array_push($slides, [
-                'url' => $url,
-                'src' => $src,
-                'alt' => $alt
-            ]);
+            array_push($slides, $this->_filterProvider->getBlockFilter()->filter($slide->getContent()));
         }
 
         return $slides;
@@ -134,44 +120,5 @@ class Slider extends \Magento\Framework\View\Element\Template implements \Magent
             return 'true';
         }
         return 'false';
-    }
-
-    /**
-     * Get if the slider should have a nav
-     *
-     * @return string
-     */
-    public function getHasNav()
-    {
-        if ($this->getNav() == '1') {
-            return 'true';
-        }
-        return 'false';
-    }
-
-    /**
-     * Get the number of slides to show at once
-     *
-     * @return string
-     */
-    public function getSlidesToShowFormatted()
-    {
-        if ($this->getSlidesToShow()) {
-            return $this->getSlidesToShow();
-        }
-        return '1';
-    }
-
-    /**
-     * Get the number of slides to scroll at once
-     *
-     * @return string
-     */
-    public function getSlidesToScrollFormatted()
-    {
-        if ($this->getSlidesToScroll()) {
-            return $this->getSlidesToScroll();
-        }
-        return '1';
     }
 }

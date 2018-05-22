@@ -64,20 +64,6 @@
                 </item>
             </argument>
         </column>
-        <column name="url">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">false</item>
-                        </item>
-                    </item>
-                    <item name="label" xsi:type="string" translate="true">URL</item>
-                </item>
-            </argument>
-        </column>
         <actionsColumn name="actions" class="AlexRyall\Slider\Ui\Component\Listing\Column\PageActions">
             <settings>
                 <indexField>id</indexField>

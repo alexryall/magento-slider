@@ -34,24 +34,6 @@
                     </option>
                 </options>
             </parameter>
-            <parameter name="nav" xsi:type="select" visible="true"
-                       source_model="Magento\Config\Model\Config\Source\Yesno">
-                <label translate="true">Thumbnail Navigation</label>
-            </parameter>
-            <parameter name="slides_to_show" xsi:type="text" visible="true">
-                <label translate="true">Slides to Show</label>
-                <depends>
-                    <parameter name="nav" value="1" />
-                </depends>
-                <value>3</value>
-            </parameter>
-            <parameter name="slides_to_scroll" xsi:type="text" visible="true">
-                <label translate="true">Slides to Scroll</label>
-                <depends>
-                    <parameter name="nav" value="1" />
-                </depends>
-                <value>1</value>
-            </parameter>
             <parameter xsi:type="multiselect" name="slide_ids" visible="true" source_model="AlexRyall\Slider\Model\Adminhtml\System\Config\Slides">
                 <label translate="true">Specify Slides</label>
             </parameter>

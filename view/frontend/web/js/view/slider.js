@@ -20,17 +20,6 @@ define([
                 rtl: this.rtl,
                 fade: this.fade
             });
-        },
-
-        initNavSlick: function (element) {
-            $(element).slick({
-                slidesToShow: this.slidesToShow,
-                slidesToScroll: this.slidesToScroll,
-                asNavFor: '#' + $(element).attr('id').replace('-nav', ''),
-                dots: true,
-                centerMode: true,
-                focusOnSelect: true
-            });
         }
     });
 });
