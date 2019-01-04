@@ -75,7 +75,11 @@ class Save extends \Magento\Backend\App\Action
             }
 
             if (isset($data['image'][0]['name'])) {
-                $this->getImageUploader()->moveFileFromTmp($data['image'][0]['name']);
+                try {
+                    $this->getImageUploader()->moveFileFromTmp($data['image'][0]['name']);
+                } catch (\Exception $e) {
+                    //skip image if there's a problem saving it, probably already been saved
+                }
 
                 $data['image'] = Save::BASEPATH . str_replace(Save::BASEPATH, "", $data['image'][0]['name']);
             } else {
