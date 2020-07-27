@@ -33,6 +33,14 @@ class Save extends \Magento\Backend\App\Action
     }
 
     /**
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('AlexRyall_Slider::slide');
+    }
+
+    /**
      * Save action
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
@@ -63,11 +71,6 @@ class Save extends \Magento\Backend\App\Action
             }
 
             $model->setData($data);
-
-            $this->_eventManager->dispatch(
-                'cms_page_prepare_save',
-                ['page' => $model, 'request' => $this->getRequest()]
-            );
 
             try {
                 $model->save($model);

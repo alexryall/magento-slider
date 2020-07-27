@@ -4,6 +4,14 @@ namespace AlexRyall\Slider\Controller\Adminhtml\Slide;
 class Delete extends \Magento\Backend\App\Action
 {
     /**
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('AlexRyall_Slider::slide');
+    }
+
+    /**
      * Delete action
      *
      * @return \Magento\Backend\Model\View\Result\Redirect

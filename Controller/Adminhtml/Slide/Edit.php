@@ -6,6 +6,14 @@ use Magento\Backend\App\Action;
 class Edit extends \Magento\Backend\App\Action
 {
     /**
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed('AlexRyall_Slider::slide');
+    }
+
+    /**
      * Core registry
      *
      * @var \Magento\Framework\Registry
